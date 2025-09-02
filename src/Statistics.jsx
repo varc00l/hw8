@@ -9,5 +9,5 @@ function Statistics({ good, neutral, bad, total, positivePercentage }) {
         </div>
     )
 }
-
+// dsfddfdff
 export default Statistics
