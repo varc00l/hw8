@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import FeedbackOptions from './FeedbackOptions'
 import Statistics from './Statistics'
@@ -10,7 +10,11 @@ function App() {
     good: 0,
     neutral: 0,
     bad: 0
-  })
+  });
+
+  useEffect(() => {
+    // This effect could be used for side effects, like fetching data or logging
+  }, [state]);
 
   const countTotalFeedback = () => {
     return state.good + state.neutral + state.bad;
@@ -19,14 +23,14 @@ function App() {
   const countPositiveFeedbackPercentage = () => {
     const total = countTotalFeedback();
     return total > 0 ? ((state.good / total) * 100).toFixed(2) + '%' : '0%';
-  }
+  };
 
   const handleLeaveFeedback = (type) => {
     setState(prev => ({
       ...prev,
       [type]: prev[type] + 1
-    }))
-  }
+    }));
+  };
 
   return (
     <>
@@ -50,7 +54,7 @@ function App() {
         )}
       </Section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
