@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import FeedbackOptions from './FeedbackOptions'
 import Statistics from './Statistics'
 import Section from './Section'
 import Notification from './Notification'
+
 
 function App() {
   const [state, setState] = useState({
@@ -11,6 +12,20 @@ function App() {
     neutral: 0,
     bad: 0
   })
+
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const savedContacts = localStorage.getItem('contacts');
+    if (savedContacts) {
+      setContacts(JSON.parse(savedContacts));
+    }
+  }, []);
+
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const countTotalFeedback = () => {
     return state.good + state.neutral + state.bad;
@@ -48,6 +63,8 @@ function App() {
         ) : (
           <Notification message="No feedback given" />
         )}
+      </Section>
+      <Section title="Phonebook">
       </Section>
     </>
   )
