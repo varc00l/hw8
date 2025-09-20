@@ -14,7 +14,10 @@ function App() {
   });
 
   useEffect(() => {
-    // This effect could be used for side effects, like fetching data or logging
+    const savedState = localStorage.getItem('feedbackState');
+    if (savedState) {
+      setState(JSON.parse(savedState));
+    }
   }, [state]);
 
   const [contacts, setContacts] = useState([]);
